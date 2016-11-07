@@ -2,6 +2,10 @@
 title: linux上的github免去输入账号密码
 date: 2016-11-07 22:32:57
 tags:
+ - linux
+ - git
+categories:
+ - 说明书
 ---
 
 一直输入用户名密码很烦吧
