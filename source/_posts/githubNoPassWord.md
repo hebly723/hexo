@@ -45,3 +45,5 @@ git config --global credential.helper store
 ```
 
 然后git push 跟git pull就无需输入账号密码了
+
+原网址:http://blog.sina.com.cn/s/blog_96e3da700102weuv.html
