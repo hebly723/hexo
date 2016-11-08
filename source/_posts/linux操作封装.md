@@ -51,4 +51,45 @@ sudo chmod 777 try.sh
 ./try.sh
 ```
 
-可以看到,写在文件中操作按序完成了
+ - 可以看到,写在文件中操作按序完成了
+
+ - 甚至还可以在里面添加变量
+
+ - 在命令行状态下创建变量
+
+```bash
+export update="修改"
+```
+
+=两边不能有间隔
+
+ - 新建文件
+
+```bash
+vim echo.sh
+```
+
+ - 文件中写入下列内容
+
+```bash
+#!/bin/bash
+echo $update
+exit
+```
+echo之后加上某个值,就打印某个值
+
+ - 保存
+
+ - 给文件加上执行权限
+
+```bash
+sudo chmod 777 echo.sh
+```
+
+ - 运行
+
+```bash
+./echo.sh
+```
+
+可以看到,打印了 修改
