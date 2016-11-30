@@ -32,3 +32,7 @@ TypeError: The header content contains invalid characters
     at Server.emit (events.js:191:7)
     at HTTPParser.parserOnIncoming [as onIncoming] (_http_server.js:547:12)
     at HTTPParser.parserOnHeadersComplete (_http_common.js:99:23)
+INFO  Start processing
+INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
+INFO  Start processing
+INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
