@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.AnnouncementMapper" >
+  <resultMap id="BaseResultMap" type="po.Announcement" >
+    <id column="AN_ID" property="anId" jdbcType="INTEGER" />
+    <result column="AN_CRE_ID" property="anCreId" jdbcType="VARCHAR" />
+    <result column="AN_TITLE" property="anTitle" jdbcType="VARCHAR" />
+    <result column="AN_DESC" property="anDesc" jdbcType="VARCHAR" />
+    <result column="AN_CRE_DATE" property="anCreDate" jdbcType="TIMESTAMP" />
+    <result column="AN_ACADEMY" property="anAcademy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    AN_ID, AN_CRE_ID, AN_TITLE, AN_DESC, AN_CRE_DATE, AN_ACADEMY
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="po.AnnouncementExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from announcement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from announcement
+    where AN_ID = #{anId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from announcement
+    where AN_ID = #{anId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.AnnouncementExample" >
+    delete from announcement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.Announcement" >
+    insert into announcement (AN_ID, AN_CRE_ID, AN_TITLE, 
+      AN_DESC, AN_CRE_DATE, AN_ACADEMY
+      )
+    values (#{anId,jdbcType=INTEGER}, #{anCreId,jdbcType=VARCHAR}, #{anTitle,jdbcType=VARCHAR}, 
+      #{anDesc,jdbcType=VARCHAR}, #{anCreDate,jdbcType=TIMESTAMP}, #{anAcademy,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="po.Announcement" >
+    insert into announcement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="anId != null" >
+        AN_ID,
+      </if>
+      <if test="anCreId != null" >
+        AN_CRE_ID,
+      </if>
+      <if test="anTitle != null" >
+        AN_TITLE,
+      </if>
+      <if test="anDesc != null" >
+        AN_DESC,
+      </if>
+      <if test="anCreDate != null" >
+        AN_CRE_DATE,
+      </if>
+      <if test="anAcademy != null" >
+        AN_ACADEMY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="anId != null" >
+        #{anId,jdbcType=INTEGER},
+      </if>
+      <if test="anCreId != null" >
+        #{anCreId,jdbcType=VARCHAR},
+      </if>
+      <if test="anTitle != null" >
+        #{anTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="anDesc != null" >
+        #{anDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="anCreDate != null" >
+        #{anCreDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="anAcademy != null" >
+        #{anAcademy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.AnnouncementExample" resultType="java.lang.Integer" >
+    select count(*) from announcement
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update announcement
+    <set >
+      <if test="record.anId != null" >
+        AN_ID = #{record.anId,jdbcType=INTEGER},
+      </if>
+      <if test="record.anCreId != null" >
+        AN_CRE_ID = #{record.anCreId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.anTitle != null" >
+        AN_TITLE = #{record.anTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.anDesc != null" >
+        AN_DESC = #{record.anDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.anCreDate != null" >
+        AN_CRE_DATE = #{record.anCreDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.anAcademy != null" >
+        AN_ACADEMY = #{record.anAcademy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update announcement
+    set AN_ID = #{record.anId,jdbcType=INTEGER},
+      AN_CRE_ID = #{record.anCreId,jdbcType=VARCHAR},
+      AN_TITLE = #{record.anTitle,jdbcType=VARCHAR},
+      AN_DESC = #{record.anDesc,jdbcType=VARCHAR},
+      AN_CRE_DATE = #{record.anCreDate,jdbcType=TIMESTAMP},
+      AN_ACADEMY = #{record.anAcademy,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.Announcement" >
+    update announcement
+    <set >
+      <if test="anCreId != null" >
+        AN_CRE_ID = #{anCreId,jdbcType=VARCHAR},
+      </if>
+      <if test="anTitle != null" >
+        AN_TITLE = #{anTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="anDesc != null" >
+        AN_DESC = #{anDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="anCreDate != null" >
+        AN_CRE_DATE = #{anCreDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="anAcademy != null" >
+        AN_ACADEMY = #{anAcademy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AN_ID = #{anId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.Announcement" >
+    update announcement
+    set AN_CRE_ID = #{anCreId,jdbcType=VARCHAR},
+      AN_TITLE = #{anTitle,jdbcType=VARCHAR},
+      AN_DESC = #{anDesc,jdbcType=VARCHAR},
+      AN_CRE_DATE = #{anCreDate,jdbcType=TIMESTAMP},
+      AN_ACADEMY = #{anAcademy,jdbcType=VARCHAR}
+    where AN_ID = #{anId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.TaskMapper" >
+  <resultMap id="BaseResultMap" type="po.Task" >
+    <id column="TAS_ID" property="tasId" jdbcType="INTEGER" />
+    <result column="TAS_CRE_ID" property="tasCreId" jdbcType="VARCHAR" />
+    <result column="TAS_CRE_DATE" property="tasCreDate" jdbcType="TIMESTAMP" />
+    <result column="TAS_DUE_DATE" property="tasDueDate" jdbcType="TIMESTAMP" />
+    <result column="TAS_TITLE" property="tasTitle" jdbcType="VARCHAR" />
+    <result column="TAS_DESC" property="tasDesc" jdbcType="VARCHAR" />
+    <result column="TAS_DOC_ID" property="tasDocId" jdbcType="VARCHAR" />
+    <result column="TAS_DOC1_NAME" property="tasDoc1Name" jdbcType="VARCHAR" />
+    <result column="TAS_DOC2_NAME" property="tasDoc2Name" jdbcType="VARCHAR" />
+    <result column="TAS_DOC3_NAME" property="tasDoc3Name" jdbcType="VARCHAR" />
+    <result column="TAS_FDOC1_NAME" property="tasFdoc1Name" jdbcType="VARCHAR" />
+    <result column="TAS_FDOC2_NAME" property="tasFdoc2Name" jdbcType="VARCHAR" />
+    <result column="TAS_FDOC3_NAME" property="tasFdoc3Name" jdbcType="VARCHAR" />
+    <result column="TAS_STATUS" property="tasStatus" jdbcType="CHAR" />
+    <result column="TAS_ACADEMY" property="tasAcademy" jdbcType="VARCHAR" />
+    <result column="TAS_GRADE" property="tasGrade" jdbcType="VARCHAR" />
+    <result column="TAS_AC_ID" property="tasAcId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TAS_ID, TAS_CRE_ID, TAS_CRE_DATE, TAS_DUE_DATE, TAS_TITLE, TAS_DESC, TAS_DOC_ID, 
+    TAS_DOC1_NAME, TAS_DOC2_NAME, TAS_DOC3_NAME, TAS_FDOC1_NAME, TAS_FDOC2_NAME, TAS_FDOC3_NAME, 
+    TAS_STATUS, TAS_ACADEMY, TAS_GRADE, TAS_AC_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="po.TaskExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from task
+    where TAS_ID = #{tasId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from task
+    where TAS_ID = #{tasId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.TaskExample" >
+    delete from task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.Task" >
+    insert into task (TAS_ID, TAS_CRE_ID, TAS_CRE_DATE, 
+      TAS_DUE_DATE, TAS_TITLE, TAS_DESC, 
+      TAS_DOC_ID, TAS_DOC1_NAME, TAS_DOC2_NAME, 
+      TAS_DOC3_NAME, TAS_FDOC1_NAME, TAS_FDOC2_NAME, 
+      TAS_FDOC3_NAME, TAS_STATUS, TAS_ACADEMY, 
+      TAS_GRADE, TAS_AC_ID)
+    values (#{tasId,jdbcType=INTEGER}, #{tasCreId,jdbcType=VARCHAR}, #{tasCreDate,jdbcType=TIMESTAMP}, 
+      #{tasDueDate,jdbcType=TIMESTAMP}, #{tasTitle,jdbcType=VARCHAR}, #{tasDesc,jdbcType=VARCHAR}, 
+      #{tasDocId,jdbcType=VARCHAR}, #{tasDoc1Name,jdbcType=VARCHAR}, #{tasDoc2Name,jdbcType=VARCHAR}, 
+      #{tasDoc3Name,jdbcType=VARCHAR}, #{tasFdoc1Name,jdbcType=VARCHAR}, #{tasFdoc2Name,jdbcType=VARCHAR}, 
+      #{tasFdoc3Name,jdbcType=VARCHAR}, #{tasStatus,jdbcType=CHAR}, #{tasAcademy,jdbcType=VARCHAR}, 
+      #{tasGrade,jdbcType=VARCHAR}, #{tasAcId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="po.Task" >
+  <selectKey keyProperty="tasId" order="AFTER" resultType="java.lang.Integer">
+			select LAST_INSERT_ID()
+		</selectKey>
+    insert into task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tasId != null" >
+        TAS_ID,
+      </if>
+      <if test="tasCreId != null" >
+        TAS_CRE_ID,
+      </if>
+      <if test="tasCreDate != null" >
+        TAS_CRE_DATE,
+      </if>
+      <if test="tasDueDate != null" >
+        TAS_DUE_DATE,
+      </if>
+      <if test="tasTitle != null" >
+        TAS_TITLE,
+      </if>
+      <if test="tasDesc != null" >
+        TAS_DESC,
+      </if>
+      <if test="tasDocId != null" >
+        TAS_DOC_ID,
+      </if>
+      <if test="tasDoc1Name != null" >
+        TAS_DOC1_NAME,
+      </if>
+      <if test="tasDoc2Name != null" >
+        TAS_DOC2_NAME,
+      </if>
+      <if test="tasDoc3Name != null" >
+        TAS_DOC3_NAME,
+      </if>
+      <if test="tasFdoc1Name != null" >
+        TAS_FDOC1_NAME,
+      </if>
+      <if test="tasFdoc2Name != null" >
+        TAS_FDOC2_NAME,
+      </if>
+      <if test="tasFdoc3Name != null" >
+        TAS_FDOC3_NAME,
+      </if>
+      <if test="tasStatus != null" >
+        TAS_STATUS,
+      </if>
+      <if test="tasAcademy != null" >
+        TAS_ACADEMY,
+      </if>
+      <if test="tasGrade != null" >
+        TAS_GRADE,
+      </if>
+      <if test="tasAcId != null" >
+        TAS_AC_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tasId != null" >
+        #{tasId,jdbcType=INTEGER},
+      </if>
+      <if test="tasCreId != null" >
+        #{tasCreId,jdbcType=VARCHAR},
+      </if>
+      <if test="tasCreDate != null" >
+        #{tasCreDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tasDueDate != null" >
+        #{tasDueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tasTitle != null" >
+        #{tasTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tasDesc != null" >
+        #{tasDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tasDocId != null" >
+        #{tasDocId,jdbcType=VARCHAR},
+      </if>
+      <if test="tasDoc1Name != null" >
+        #{tasDoc1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasDoc2Name != null" >
+        #{tasDoc2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasDoc3Name != null" >
+        #{tasDoc3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasFdoc1Name != null" >
+        #{tasFdoc1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasFdoc2Name != null" >
+        #{tasFdoc2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasFdoc3Name != null" >
+        #{tasFdoc3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasStatus != null" >
+        #{tasStatus,jdbcType=CHAR},
+      </if>
+      <if test="tasAcademy != null" >
+        #{tasAcademy,jdbcType=VARCHAR},
+      </if>
+      <if test="tasGrade != null" >
+        #{tasGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="tasAcId != null" >
+        #{tasAcId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="po.TaskExample" resultType="java.lang.Integer" >
+    select count(*) from task
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update task
+    <set >
+      <if test="record.tasId != null" >
+        TAS_ID = #{record.tasId,jdbcType=INTEGER},
+      </if>
+      <if test="record.tasCreId != null" >
+        TAS_CRE_ID = #{record.tasCreId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasCreDate != null" >
+        TAS_CRE_DATE = #{record.tasCreDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tasDueDate != null" >
+        TAS_DUE_DATE = #{record.tasDueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.tasTitle != null" >
+        TAS_TITLE = #{record.tasTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasDesc != null" >
+        TAS_DESC = #{record.tasDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasDocId != null" >
+        TAS_DOC_ID = #{record.tasDocId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasDoc1Name != null" >
+        TAS_DOC1_NAME = #{record.tasDoc1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasDoc2Name != null" >
+        TAS_DOC2_NAME = #{record.tasDoc2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasDoc3Name != null" >
+        TAS_DOC3_NAME = #{record.tasDoc3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasFdoc1Name != null" >
+        TAS_FDOC1_NAME = #{record.tasFdoc1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasFdoc2Name != null" >
+        TAS_FDOC2_NAME = #{record.tasFdoc2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasFdoc3Name != null" >
+        TAS_FDOC3_NAME = #{record.tasFdoc3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasStatus != null" >
+        TAS_STATUS = #{record.tasStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.tasAcademy != null" >
+        TAS_ACADEMY = #{record.tasAcademy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasGrade != null" >
+        TAS_GRADE = #{record.tasGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tasAcId != null" >
+        TAS_AC_ID = #{record.tasAcId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update task
+    set TAS_ID = #{record.tasId,jdbcType=INTEGER},
+      TAS_CRE_ID = #{record.tasCreId,jdbcType=VARCHAR},
+      TAS_CRE_DATE = #{record.tasCreDate,jdbcType=TIMESTAMP},
+      TAS_DUE_DATE = #{record.tasDueDate,jdbcType=TIMESTAMP},
+      TAS_TITLE = #{record.tasTitle,jdbcType=VARCHAR},
+      TAS_DESC = #{record.tasDesc,jdbcType=VARCHAR},
+      TAS_DOC_ID = #{record.tasDocId,jdbcType=VARCHAR},
+      TAS_DOC1_NAME = #{record.tasDoc1Name,jdbcType=VARCHAR},
+      TAS_DOC2_NAME = #{record.tasDoc2Name,jdbcType=VARCHAR},
+      TAS_DOC3_NAME = #{record.tasDoc3Name,jdbcType=VARCHAR},
+      TAS_FDOC1_NAME = #{record.tasFdoc1Name,jdbcType=VARCHAR},
+      TAS_FDOC2_NAME = #{record.tasFdoc2Name,jdbcType=VARCHAR},
+      TAS_FDOC3_NAME = #{record.tasFdoc3Name,jdbcType=VARCHAR},
+      TAS_STATUS = #{record.tasStatus,jdbcType=CHAR},
+      TAS_ACADEMY = #{record.tasAcademy,jdbcType=VARCHAR},
+      TAS_GRADE = #{record.tasGrade,jdbcType=VARCHAR},
+      TAS_AC_ID = #{record.tasAcId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.Task" >
+    update task
+    <set >
+      <if test="tasCreId != null" >
+        TAS_CRE_ID = #{tasCreId,jdbcType=VARCHAR},
+      </if>
+      <if test="tasCreDate != null" >
+        TAS_CRE_DATE = #{tasCreDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tasDueDate != null" >
+        TAS_DUE_DATE = #{tasDueDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tasTitle != null" >
+        TAS_TITLE = #{tasTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tasDesc != null" >
+        TAS_DESC = #{tasDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="tasDocId != null" >
+        TAS_DOC_ID = #{tasDocId,jdbcType=VARCHAR},
+      </if>
+      <if test="tasDoc1Name != null" >
+        TAS_DOC1_NAME = #{tasDoc1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasDoc2Name != null" >
+        TAS_DOC2_NAME = #{tasDoc2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasDoc3Name != null" >
+        TAS_DOC3_NAME = #{tasDoc3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasFdoc1Name != null" >
+        TAS_FDOC1_NAME = #{tasFdoc1Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasFdoc2Name != null" >
+        TAS_FDOC2_NAME = #{tasFdoc2Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasFdoc3Name != null" >
+        TAS_FDOC3_NAME = #{tasFdoc3Name,jdbcType=VARCHAR},
+      </if>
+      <if test="tasStatus != null" >
+        TAS_STATUS = #{tasStatus,jdbcType=CHAR},
+      </if>
+      <if test="tasAcademy != null" >
+        TAS_ACADEMY = #{tasAcademy,jdbcType=VARCHAR},
+      </if>
+      <if test="tasGrade != null" >
+        TAS_GRADE = #{tasGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="tasAcId != null" >
+        TAS_AC_ID = #{tasAcId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where TAS_ID = #{tasId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.Task" >
+    update task
+    set TAS_CRE_ID = #{tasCreId,jdbcType=VARCHAR},
+      TAS_CRE_DATE = #{tasCreDate,jdbcType=TIMESTAMP},
+      TAS_DUE_DATE = #{tasDueDate,jdbcType=TIMESTAMP},
+      TAS_TITLE = #{tasTitle,jdbcType=VARCHAR},
+      TAS_DESC = #{tasDesc,jdbcType=VARCHAR},
+      TAS_DOC_ID = #{tasDocId,jdbcType=VARCHAR},
+      TAS_DOC1_NAME = #{tasDoc1Name,jdbcType=VARCHAR},
+      TAS_DOC2_NAME = #{tasDoc2Name,jdbcType=VARCHAR},
+      TAS_DOC3_NAME = #{tasDoc3Name,jdbcType=VARCHAR},
+      TAS_FDOC1_NAME = #{tasFdoc1Name,jdbcType=VARCHAR},
+      TAS_FDOC2_NAME = #{tasFdoc2Name,jdbcType=VARCHAR},
+      TAS_FDOC3_NAME = #{tasFdoc3Name,jdbcType=VARCHAR},
+      TAS_STATUS = #{tasStatus,jdbcType=CHAR},
+      TAS_ACADEMY = #{tasAcademy,jdbcType=VARCHAR},
+      TAS_GRADE = #{tasGrade,jdbcType=VARCHAR},
+      TAS_AC_ID = #{tasAcId,jdbcType=INTEGER}
+    where TAS_ID = #{tasId,jdbcType=INTEGER}
+  </update>
+  <!--从这里开始都是添加的 -->
+  <update id="updateTaskStatus">
+  	update task 
+  	set TAS_STATUS = '3' 
+		where TAS_DUE_DATE &lt; now()
+  </update>
+  
+  <!-- 分页SQL语句 -->
+	<select id="selectTaskNotOverDueByTasCreId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from task where TAS_CRE_ID = #{tasCreId} and TAS_STATUS &lt;&gt; '3' order by TAS_CRE_DATE DESC
+		limit #{startPos},#{pageSize}
+	</select>
+	<!-- 取得记录的总数 -->
+	<select id="selectTaskNotOverDueByTasCreIdCount" resultType="long">
+		SELECT COUNT(*) FROM task where TAS_CRE_ID = #{tasCreId} and TAS_STATUS &lt;&gt; '3'
+	</select>
+	
+	<!-- 分页SQL语句 -->
+	<select id="selectTaskOverDueByTasCreId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from task where TAS_CRE_ID = #{tasCreId} and TAS_STATUS = '3' order by TAS_CRE_DATE DESC
+		limit #{startPos},#{pageSize}
+	</select>
+	<!-- 取得记录的总数 -->
+	<select id="selectTaskOverDueByTasCreIdCount" resultType="long">
+		SELECT COUNT(*) FROM task where TAS_CRE_ID = #{tasCreId} and TAS_STATUS = '3'
+	</select>
+	<select id="selectTaskUnhandled" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from task where TAS_STATUS = '0' 
+	</select> 
+	
+</mapper>

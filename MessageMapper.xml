@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.MessageMapper" >
+  <resultMap id="BaseResultMap" type="po.Message" >
+    <id column="NOT_ID" property="notId" jdbcType="INTEGER" />
+    <result column="NOT_SEN_ID" property="notSenId" jdbcType="VARCHAR" />
+    <result column="NOT_REC_ID" property="notRecId" jdbcType="VARCHAR" />
+    <result column="NOT_DET" property="notDet" jdbcType="VARCHAR" />
+    <result column="NOT_STATUS" property="notStatus" jdbcType="CHAR" />
+    <result column="NOT_SEN_DATE" property="notSenDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="ResultMap1" type="po.MessageCustom1" >
+    <id column="NOT_ID" property="notId" jdbcType="INTEGER" />
+    <result column="NOT_SEN_ID" property="notSenId" jdbcType="VARCHAR" />
+    <result column="NOT_REC_ID" property="notRecId" jdbcType="VARCHAR" />
+    <result column="NOT_DET" property="notDet" jdbcType="VARCHAR" />
+    <result column="NOT_STATUS" property="notStatus" jdbcType="CHAR" />
+    <result column="NOT_SEN_DATE" property="notSenDate" jdbcType="TIMESTAMP" />
+    <result column="USER_NAME" property="notSenName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="ResultMap2" type="po.MessageCustom1" >
+    <id column="NOT_ID" property="notId" jdbcType="INTEGER" />
+    <result column="NOT_SEN_ID" property="notSenId" jdbcType="VARCHAR" />
+    <result column="NOT_REC_ID" property="notRecId" jdbcType="VARCHAR" />
+    <result column="NOT_DET" property="notDet" jdbcType="VARCHAR" />
+    <result column="NOT_STATUS" property="notStatus" jdbcType="CHAR" />
+    <result column="NOT_SEN_DATE" property="notSenDate" jdbcType="TIMESTAMP" />
+    <result column="USER_NAME" property="notRecName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    NOT_ID, NOT_SEN_ID, NOT_REC_ID, NOT_DET, NOT_STATUS, NOT_SEN_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="po.MessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from message
+    where NOT_ID = #{notId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from message
+    where NOT_ID = #{notId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="po.MessageExample" >
+    delete from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="po.Message" >
+    insert into message (NOT_ID, NOT_SEN_ID, NOT_REC_ID, 
+      NOT_DET, NOT_STATUS, NOT_SEN_DATE
+      )
+    values (#{notId,jdbcType=INTEGER}, #{notSenId,jdbcType=VARCHAR}, #{notRecId,jdbcType=VARCHAR}, 
+      #{notDet,jdbcType=VARCHAR}, #{notStatus,jdbcType=CHAR}, #{notSenDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="po.Message" >
+    insert into message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="notId != null" >
+        NOT_ID,
+      </if>
+      <if test="notSenId != null" >
+        NOT_SEN_ID,
+      </if>
+      <if test="notRecId != null" >
+        NOT_REC_ID,
+      </if>
+      <if test="notDet != null" >
+        NOT_DET,
+      </if>
+      <if test="notStatus != null" >
+        NOT_STATUS,
+      </if>
+      <if test="notSenDate != null" >
+        NOT_SEN_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="notId != null" >
+        #{notId,jdbcType=INTEGER},
+      </if>
+      <if test="notSenId != null" >
+        #{notSenId,jdbcType=VARCHAR},
+      </if>
+      <if test="notRecId != null" >
+        #{notRecId,jdbcType=VARCHAR},
+      </if>
+      <if test="notDet != null" >
+        #{notDet,jdbcType=VARCHAR},
+      </if>
+      <if test="notStatus != null" >
+        #{notStatus,jdbcType=CHAR},
+      </if>
+      <if test="notSenDate != null" >
+        #{notSenDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertMessages" >
+    insert into message (NOT_SEN_ID,NOT_REC_ID,NOT_DET,NOT_SEN_DATE) 
+    values 
+     <foreach collection="list" item="item" index="index" separator="," >
+        (#{item.notSenId},#{item.notRecId},#{item.notDet},#{item.notSenDate})
+    </foreach>
+  </insert>
+  <select id="countByExample" parameterType="po.MessageExample" resultType="java.lang.Integer" >
+    select count(*) from message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update message
+    <set >
+      <if test="record.notId != null" >
+        NOT_ID = #{record.notId,jdbcType=INTEGER},
+      </if>
+      <if test="record.notSenId != null" >
+        NOT_SEN_ID = #{record.notSenId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notRecId != null" >
+        NOT_REC_ID = #{record.notRecId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notDet != null" >
+        NOT_DET = #{record.notDet,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notStatus != null" >
+        NOT_STATUS = #{record.notStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.notSenDate != null" >
+        NOT_SEN_DATE = #{record.notSenDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update message
+    set NOT_ID = #{record.notId,jdbcType=INTEGER},
+      NOT_SEN_ID = #{record.notSenId,jdbcType=VARCHAR},
+      NOT_REC_ID = #{record.notRecId,jdbcType=VARCHAR},
+      NOT_DET = #{record.notDet,jdbcType=VARCHAR},
+      NOT_STATUS = #{record.notStatus,jdbcType=CHAR},
+      NOT_SEN_DATE = #{record.notSenDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="po.Message" >
+    update message
+    <set >
+      <if test="notSenId != null" >
+        NOT_SEN_ID = #{notSenId,jdbcType=VARCHAR},
+      </if>
+      <if test="notRecId != null" >
+        NOT_REC_ID = #{notRecId,jdbcType=VARCHAR},
+      </if>
+      <if test="notDet != null" >
+        NOT_DET = #{notDet,jdbcType=VARCHAR},
+      </if>
+      <if test="notStatus != null" >
+        NOT_STATUS = #{notStatus,jdbcType=CHAR},
+      </if>
+      <if test="notSenDate != null" >
+        NOT_SEN_DATE = #{notSenDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where NOT_ID = #{notId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="po.Message" >
+    update message
+    set NOT_SEN_ID = #{notSenId,jdbcType=VARCHAR},
+      NOT_REC_ID = #{notRecId,jdbcType=VARCHAR},
+      NOT_DET = #{notDet,jdbcType=VARCHAR},
+      NOT_STATUS = #{notStatus,jdbcType=CHAR},
+      NOT_SEN_DATE = #{notSenDate,jdbcType=TIMESTAMP}
+    where NOT_ID = #{notId,jdbcType=INTEGER}
+  </update>
+  <!--从这里开始都是添加的 -->
+  <!-- 分页SQL语句 -->
+	<select id="selectMessageAlreadByNotRecId" resultMap="ResultMap1">
+		select USER_NAME,
+		<include refid="Base_Column_List" />
+		from user,message where NOT_REC_ID = #{notRecId} and NOT_STATUS = '1' and USER_ID = NOT_SEN_ID
+		order by NOT_SEN_DATE DESC limit #{startPos},#{pageSize}
+	</select>
+	<!-- 取得记录的总数 -->
+	<select id="selectMessageAlreadByNotRecIdCount" resultType="long">
+		SELECT COUNT(*) FROM message where NOT_REC_ID = #{notRecId} and NOT_STATUS = '1'
+	</select>
+	
+	<!-- 分页SQL语句 -->
+	<select id="selectMessageUnreadByNotRecId" resultMap="ResultMap1">
+		select USER_NAME,
+		<include refid="Base_Column_List" />
+		from user,message where NOT_REC_ID = #{notRecId} and NOT_STATUS = '0' and USER_ID = NOT_SEN_ID
+		order by NOT_SEN_DATE DESC limit #{startPos},#{pageSize}
+	</select>
+	<!-- 取得记录的总数 -->
+	<select id="selectMessageUnreadByNotRecIdCount" resultType="long">
+		SELECT COUNT(*) FROM message where NOT_REC_ID = #{notRecId} and NOT_STATUS = '0'
+	</select>
+	
+	<!-- 分页SQL语句 -->
+	<select id="selectMessageByNotSenId" resultMap="ResultMap2">
+		select USER_NAME,
+		<include refid="Base_Column_List" />
+		from user,message where NOT_SEN_ID = #{notSenId} and USER_ID = NOT_REC_ID
+		order by NOT_SEN_DATE DESC limit #{startPos},#{pageSize}
+	</select>
+	<!-- 取得记录的总数 -->
+	<select id="selectMessageByNotSenIdCount" resultType="long">
+		SELECT COUNT(*) FROM message where NOT_SEN_ID = #{notSenId}
+	</select>
+</mapper>
