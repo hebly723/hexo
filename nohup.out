@@ -1,0 +1,27 @@
+INFO  Start processing
+INFO  Hexo is running at http://localhost:4000/. Press Ctrl+C to stop.
+FATAL Permission denied. You can't use port 80.
+FATAL Something's wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html
+Error: listen EACCES 0.0.0.0:80
+    at Object.exports._errnoException (util.js:1036:11)
+    at exports._exceptionWithHostPort (util.js:1059:20)
+    at Server._listen2 (net.js:1239:19)
+    at listen (net.js:1288:10)
+    at net.js:1398:9
+    at _combinedTickCallback (internal/process/next_tick.js:77:11)
+    at process._tickCallback (internal/process/next_tick.js:98:9)
+FATAL listen EACCES 0.0.0.0:80
+Error: listen EACCES 0.0.0.0:80
+    at Object.exports._errnoException (util.js:1036:11)
+    at exports._exceptionWithHostPort (util.js:1059:20)
+    at Server._listen2 (net.js:1239:19)
+    at listen (net.js:1288:10)
+    at net.js:1398:9
+    at _combinedTickCallback (internal/process/next_tick.js:77:11)
+    at process._tickCallback (internal/process/next_tick.js:98:9)
+INFO  Start processing
+INFO  Hexo is running at http://localhost:80/. Press Ctrl+C to stop.
+INFO  Start processing
+INFO  Hexo is running at http://localhost:80/. Press Ctrl+C to stop.
+INFO  Start processing
+INFO  Hexo is running at http://localhost:80/. Press Ctrl+C to stop.
