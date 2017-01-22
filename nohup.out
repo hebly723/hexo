@@ -44,3 +44,42 @@ INFO  Start processing
 INFO  Hexo is running at http://localhost:1447/. Press Ctrl+C to stop.
 INFO  Start processing
 INFO  Hexo is running at http://localhost:1447/. Press Ctrl+C to stop.
+INFO  Start processing
+INFO  Hexo is running at http://localhost:1447/. Press Ctrl+C to stop.
+
+<--- Last few GCs --->
+
+[2370:0x3aa79e0] 633856625 ms: Scavenge 48.2 (60.0) -> 44.8 (60.0) MB, 2.2 / 0.0 ms  allocation failure 
+[2370:0x3aa79e0] 808597162 ms: Mark-sweep 47.1 (61.0) -> 40.0 (54.0) MB, 221583.8 / 421.0 ms  (+ 36027.9 ms in 35 steps since start of marking, biggest step 21523.8 ms) allocation failure GC in old space requested
+[2370:0x3aa79e0] 808878352 ms: Scavenge 40.6 (54.0) -> 40.0 (54.0) MB, 2263.2 / 80.3 ms  allocation failure 
+
+
+<--- JS stacktrace --->
+
+==== JS stack trace =========================================
+
+Security context: 0x1ec3158c0d31 <JS Object>
+    0: builtin exit frame: new constructor(aka Function)(this=0x1ec3158a7e41 <JS Function Function (SharedFunctionInfo 0x1ec31586b3d1)>,0xee5cd1f3b71 <Very long string[26412]>,0x3c002844c849 <String[3]: _fn>,0x3c002844c829 <String[6]: _utils>,0x3c002844bee1 <String[8]: _filters>,0x3c002844c809 <String[4]: _ctx>,0x3c002844c7e9 <String[5]: _swig>)
+
+    1: precompile [/github/hexo/node_modules/swi...
+
+FATAL ERROR: Committing semi space failed. Allocation failed - process out of memory
+ 1: node::Abort() [hexo]
+ 2: 0x126492c [hexo]
+ 3: v8::Utils::ReportOOMFailure(char const*, bool) [hexo]
+ 4: v8::internal::V8::FatalProcessOutOfMemory(char const*, bool) [hexo]
+ 5: v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [hexo]
+ 6: v8::internal::Heap::CollectGarbage(v8::internal::GarbageCollector, char const*, char const*, v8::GCCallbackFlags) [hexo]
+ 7: v8::internal::Factory::NewRawTwoByteString(int, v8::internal::PretenureFlag) [hexo]
+ 8: v8::internal::String::SlowFlatten(v8::internal::Handle<v8::internal::ConsString>, v8::internal::PretenureFlag) [hexo]
+ 9: v8::internal::Parser::ParseProgram(v8::internal::Isolate*, v8::internal::ParseInfo*) [hexo]
+10: v8::internal::Parser::Parse(v8::internal::ParseInfo*) [hexo]
+11: v8::internal::Parser::ParseStatic(v8::internal::ParseInfo*) [hexo]
+12: 0xcff399 [hexo]
+13: v8::internal::Compiler::GetFunctionFromEval(v8::internal::Handle<v8::internal::String>, v8::internal::Handle<v8::internal::SharedFunctionInfo>, v8::internal::Handle<v8::internal::Context>, v8::internal::LanguageMode, v8::internal::ParseRestriction, int, int, int, int, v8::internal::Handle<v8::internal::Object>, v8::ScriptOriginOptions) [hexo]
+14: v8::internal::Compiler::GetFunctionFromString(v8::internal::Handle<v8::internal::Context>, v8::internal::Handle<v8::internal::String>, v8::internal::ParseRestriction) [hexo]
+15: 0xb272c5 [hexo]
+16: v8::internal::Builtin_FunctionConstructor(int, v8::internal::Object**, v8::internal::Isolate*) [hexo]
+17: 0xbea88f06167
+INFO  Start processing
+INFO  Hexo is running at http://localhost:1447/. Press Ctrl+C to stop.
