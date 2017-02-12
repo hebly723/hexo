@@ -1,7 +1,7 @@
 #!/bin/sh
 hexo clean
 hexo generate
-git add .
+git add -A .
 git commit -m $update
 echo $update
 exit
